@@ -1,16 +1,15 @@
 import { Router } from "express";
-import delay from "../middlewares/delay";
-import allow from "../middlewares/allow";
 import commentsRouter from './comments';
 import followsRouter from './follows';
 import postsRouter from './posts';
 import feedRouter from './feed';
-import authBearerParser from "auth-bearer-parser";
+import authRouter from './auth';
 import auth from "../middlewares/auth";
+import authBearerParser from "auth-bearer-parser";
 
 const router = Router()
-router.use(delay)
-router.use(allow)
+router.use('/auth', authRouter)
+
 router.use(authBearerParser({isThrowError: true}))
 router.use(auth)
 
@@ -18,4 +17,5 @@ router.use('/comments', commentsRouter)
 router.use('/profile', postsRouter)
 router.use('/follows', followsRouter)
 router.use('/feed', feedRouter)
+
 export default router
