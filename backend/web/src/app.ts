@@ -7,6 +7,10 @@ import followsRouter from './routers/follows';
 import postsRouter from './routers/posts';
 import feedRouter from './routers/feed';
 import authRouter from './routers/auth';
+import allowRouter from './routers/allow';
+import delayRouter from './routers/delay';
+import delayAllowRouter from './routers/delay-allow';
+
 import { Sequelize } from "sequelize-typescript";
 import cors from 'cors'
 import authBearerParser from 'auth-bearer-parser';
@@ -27,8 +31,10 @@ app.use(cors())
 app.use(json())
 app.use(socket)
 
-app.use(/.*allow.*/gm, allow)
-app.use(/.*delay.*/gm, delay)
+// app.use(/.*allow.*/gm, allow)
+// app.use(/.*delay.*/gm, delay)
+app.use('/allow', allowRouter)
+app.use('/delay/allow', delayAllowRouter)
 
 // all /allow routers should be before the auth middlewares
 app.use('/auth', authRouter)
@@ -37,21 +43,7 @@ app.use('/auth', authRouter)
 
 app.use(authBearerParser({isThrowError: true}))
 app.use(auth)
-
-app.use('/allow/comments', allow, commentsRouter)
-app.use('/allow/profile', allow, postsRouter)
-app.use('/allow/follows', allow, followsRouter)
-app.use('/allow/feed', allow, feedRouter)
-
-app.use('/delay/allow/comments', delay, allow, commentsRouter)
-app.use('/delay/allow/profile', delay, allow, postsRouter)
-app.use('/delay/allow/follows', delay, allow, followsRouter)
-app.use('/delay/allow/feed', delay, allow, feedRouter)
-
-app.use('/delay/comments', delay, commentsRouter)
-app.use('/delay/profile', delay, postsRouter)
-app.use('/delay/follows', delay, followsRouter)
-app.use('/delay/feed', delay, feedRouter)
+app.use('/delay', delayRouter)
 
 app.use('/comments', commentsRouter)
 app.use('/profile', postsRouter)
