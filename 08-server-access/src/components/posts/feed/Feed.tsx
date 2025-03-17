@@ -12,6 +12,7 @@ export default function Feed() {
             setFeed(feed)
         })()
     }, [])
+    
     return (
         <div className='Feed'>
             <ul>

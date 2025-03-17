@@ -12,6 +12,7 @@ export default function Following() {
             setFollowing(following)
         })()
     }, [])
+    
     return (
         <div className='Followers'>
             <ul>

@@ -13,6 +13,7 @@ export default function Followers() {
             setFollowers(followers)
         })()
     }, [])
+    
     return (
         <div className='Followers'>
             <ul>
