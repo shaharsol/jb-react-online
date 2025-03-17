@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react'
 import './Feed.css'
-import Post from '../../../models/post/Post'
+import PostModel from '../../../models/post/Post'
 import feedService from '../../../services/feed'
+import Post from '../post/Post'
 
 export default function Feed() {
-    const [ feed, setFeed ] = useState<Post[]>([])
+    const [ feed, setFeed ] = useState<PostModel[]>([])
 
     useEffect(() => {
         (async() => {
@@ -15,9 +16,7 @@ export default function Feed() {
     
     return (
         <div className='Feed'>
-            <ul>
-                {feed.map(post => <li key={post.id}>{post.title}</li>)}
-            </ul>
+             {feed.map(post => <Post key={post.id} post={post}/>)}
         </div>
     )
 }
