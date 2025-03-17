@@ -3,7 +3,7 @@ import Post from "../models/post/Post"
 
 class ProfileService {
     async getProfile(): Promise<Post[]> {
-        const response = await axios.get<Post[]>('http://localhost:3003/allow/profile')
+        const response = await axios.get<Post[]>(`${import.meta.env.VITE_REST_SERVER_URL}/allow/profile`)
         return response.data
     }
 }
