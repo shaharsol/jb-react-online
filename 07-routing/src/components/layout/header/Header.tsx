@@ -11,6 +11,7 @@ export default function Header() {
                 <nav>
                     <NavLink to="/profile">profile</NavLink>
                     <NavLink to="/feed">feed</NavLink>
+                    <NavLink to="/search">search</NavLink>
                 </nav>
             </div>
             <div>
