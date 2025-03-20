@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import './Followers.css'
 import User from '../../../models/user/User'
 import followersService from '../../../services/followers'
+import Follow from '../follow/Follow'
 
 export default function Followers() {
 
@@ -16,9 +17,7 @@ export default function Followers() {
     
     return (
         <div className='Followers'>
-            <ul>
-                {followers.map(user => <li key={user.id}>{user.name}</li>)}
-            </ul>
+            {followers.map(user => <Follow key={user.id} user={user}/>)}
         </div>
     )
 }
