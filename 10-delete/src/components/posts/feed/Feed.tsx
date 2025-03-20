@@ -20,7 +20,11 @@ export default function Feed() {
     
     return (
         <div className='Feed'>
-             {feed.map(post => <Post key={post.id} post={post}/>)}
+             {feed.map(post => <Post 
+                                key={post.id} 
+                                post={post} 
+                                isAllowedActions={false}
+                                />)}
         </div>
     )
 }
