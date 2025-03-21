@@ -17,10 +17,19 @@ export default function Following() {
             }
         })()
     }, [])
+
+    function unfollow(id: string) {
+        setFollowing(following.filter(user => user.id !== id))
+    }
     
     return (
         <div className='Followers'>
-            {following.map(user => <Follow key={user.id} user={user}/>)}
+            {following.map(user => <Follow 
+                                    key={user.id} 
+                                    user={user}
+                                    isAllowUnfollow={true}
+                                    unfollow={unfollow}
+                                    />)}
         </div>
     )
 }

@@ -21,7 +21,11 @@ export default function Followers() {
     
     return (
         <div className='Followers'>
-            {followers.map(user => <Follow key={user.id} user={user}/>)}
+            {followers.map(user => <Follow 
+                                    key={user.id} 
+                                    user={user}
+                                    isAllowUnfollow={false}
+                                    />)}
         </div>
     )
 }
