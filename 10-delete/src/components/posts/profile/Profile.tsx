@@ -19,12 +19,17 @@ export default function Profile() {
         })()
     }, [])
 
+    function removePost(id: string) {
+        setProfile(profile.filter(post => post.id !== id))
+    }
+
     return (
         <div className='Profile'>
             {profile.map(post => <Post 
                                     key={post.id} 
                                     post={post} 
                                     isAllowedActions={true}
+                                    removePost={removePost}
                                 />)}
         </div>
     )

@@ -4,16 +4,20 @@ import './Post.css'
 
 interface PostProps {
     post: PostModel,
-    isAllowedActions: boolean
+    isAllowedActions: boolean,
+    removePost(id: string): void
 }
 export default function Post(props: PostProps) {
 
     const { id, title, body, user, createdAt} = props.post;
-    const { isAllowedActions } = props;
+    const { isAllowedActions, removePost } = props;
 
     async function deleteMe() {
         try {
-            await profileService.remove(id)
+            if(confirm('are you sure you want to delete this post?')) {
+                await profileService.remove(id)
+                removePost(id)
+            }
         } catch (e) {
             alert(e)
         }
