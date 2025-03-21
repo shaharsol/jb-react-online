@@ -3,3 +3,8 @@
     flex-direction: column;
     gap: 4px;
 }
+
+.NewPost .form-error {
+    color: red;
+    font-weight: 900;
+}
