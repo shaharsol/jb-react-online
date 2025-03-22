@@ -9,14 +9,14 @@
     box-shadow: 2px;
 }
 
-.Post .title {
+.Post > .title {
     font-size: large;
 }
 
-.Post .by-line {
+.Post > .by-line {
     text-decoration: underline;
 }
 
-.Post .body {
+.Post > .body {
     font-size: small;
 }

@@ -1,10 +1,10 @@
 import User from "../user/User";
+import PostCommentDraft from "./PostCommentDraft";
 
-export default interface PostComment {
+export default interface PostComment extends PostCommentDraft{
     id: string,
     postId: string,
     userId: string,
-    body: string,
     createdAt: string,
     updatedAt: string,
     user: User

@@ -4,6 +4,7 @@ import './Profile.css'
 import PostModel from '../../../models/post/Post'
 import Post from '../post/Post'
 import NewPost from '../new/NewPost'
+import PostComment from '../../../models/post-comment/PostComment'
 
 export default function Profile() {
 
@@ -28,6 +29,12 @@ export default function Profile() {
         setProfile([post, ...profile])
     }
 
+    function addComment(postId: string, comment: PostComment) {
+        const newProfile = [...profile]
+        newProfile.find(post => post.id === postId)?.comments.push(comment)
+        setProfile(newProfile)
+    }
+
     return (
         <div className='Profile'>
             <NewPost addPost={addPost} />
@@ -36,6 +43,7 @@ export default function Profile() {
                                     post={post} 
                                     isAllowedActions={true}
                                     removePost={removePost}
+                                    addComment={addComment}
                                 />)}
         </div>
     )
