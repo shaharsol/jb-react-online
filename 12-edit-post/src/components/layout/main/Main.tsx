@@ -10,7 +10,7 @@ export default function Main() {
         <Routes>
             <Route path="/" element={<Navigate to="/profile"/>} />    
             <Route path="/profile" element={<Profile />} />
-            <Route path="/profile/edit" element={<EditPost />} />
+            <Route path="/profile/edit/:id" element={<EditPost />} />
             <Route path="/feed" element={<Feed />} />
             <Route path="/search" element={<Search />} />
             <Route path="*" element={<NotFound />} />

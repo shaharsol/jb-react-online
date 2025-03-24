@@ -29,7 +29,7 @@ export default function Post(props: PostProps) {
 
     const navigate = useNavigate()
     function editMe() {
-        navigate(`/profile/edit`)
+        navigate(`/profile/edit/${id}`)
     }
 
     return (
