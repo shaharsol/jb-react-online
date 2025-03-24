@@ -69,7 +69,8 @@ export default function EditPost() {
                         }
                     })}></textarea>
                     <span className='form-error'>{formState.errors.body?.message}</span>
-                    <button>Edit Post</button>
+                    {!formState.isSubmitting && <button>Edit Post</button>}
+                    {formState.isSubmitting && <p>saving changes to database... <i><Spinner /></i></p>}
                 </form> 
             </>}
 
