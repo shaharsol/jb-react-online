@@ -1,0 +1,10 @@
+.EditPost > form {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.EditPost .form-error {
+    color: red;
+    font-weight: 900;
+}
