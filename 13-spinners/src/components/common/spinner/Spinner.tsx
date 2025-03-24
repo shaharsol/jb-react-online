@@ -1,5 +1,5 @@
 import './Spinner.css'
-import spinnerSrc from '../../assets/spinner.webp'
+import spinnerSrc from '../../../assets/spinner.webp'
 
 export default function Spinner() {
     return (

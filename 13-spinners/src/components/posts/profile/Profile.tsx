@@ -5,7 +5,7 @@ import PostModel from '../../../models/post/Post'
 import Post from '../post/Post'
 import NewPost from '../new/NewPost'
 import PostComment from '../../../models/post-comment/PostComment'
-import Spinner from '../../common/Spinner'
+import Spinner from '../../common/spinner/Spinner'
 
 export default function Profile() {
 

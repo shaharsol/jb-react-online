@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
 import profileService from '../../../services/profile'
 import PostDraft from '../../../models/post/PostDraft'
 import { useForm } from 'react-hook-form'
-import Spinner from '../../common/Spinner'
+import Spinner from '../../common/spinner/Spinner'
 
 
 export default function EditPost() {

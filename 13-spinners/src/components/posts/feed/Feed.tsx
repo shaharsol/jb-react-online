@@ -4,7 +4,7 @@ import PostModel from '../../../models/post/Post'
 import feedService from '../../../services/feed'
 import Post from '../post/Post'
 import PostComment from '../../../models/post-comment/PostComment'
-import Spinner from '../../common/Spinner'
+import Spinner from '../../common/spinner/Spinner'
 
 export default function Feed() {
     const [ feed, setFeed ] = useState<PostModel[]>([])
