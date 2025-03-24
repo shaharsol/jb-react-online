@@ -3,6 +3,7 @@ import './NewPost.css'
 import PostDraft from '../../../models/post/PostDraft'
 import profileService from '../../../services/profile'
 import Post from '../../../models/post/Post'
+import SpinnerButton from '../../common/spinner-button/SpinnerButton'
 
 interface NewPostProps {
     addPost(post: Post): void
@@ -48,7 +49,11 @@ export default function NewPost(props: NewPostProps) {
                     }
                 })}></textarea>
                 <span className='form-error'>{formState.errors.body?.message}</span>
-                <button>Add Post</button>
+                <SpinnerButton 
+                    isSubmitting={formState.isSubmitting}
+                    buttonText='Add Post'
+                    spinnerText='Adding post...'
+                />
             </form>
         </div>
     )

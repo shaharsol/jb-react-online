@@ -5,6 +5,7 @@ import profileService from '../../../services/profile'
 import PostDraft from '../../../models/post/PostDraft'
 import { useForm } from 'react-hook-form'
 import Spinner from '../../common/spinner/Spinner'
+import SpinnerButton from '../../common/spinner-button/SpinnerButton'
 
 
 export default function EditPost() {
@@ -69,8 +70,12 @@ export default function EditPost() {
                         }
                     })}></textarea>
                     <span className='form-error'>{formState.errors.body?.message}</span>
-                    {!formState.isSubmitting && <button>Edit Post</button>}
-                    {formState.isSubmitting && <p>saving changes to database... <i><Spinner /></i></p>}
+                    <SpinnerButton 
+                        isSubmitting={formState.isSubmitting}
+                        buttonText='Edit Post'
+                        spinnerText='saving changes to database'
+                    />
+
                 </form> 
             </>}
 

@@ -3,6 +3,7 @@ import './Following.css'
 import User from '../../../models/user/User'
 import followingService from '../../../services/following'
 import Follow from '../follow/Follow'
+import Spinner from '../../common/spinner/Spinner'
 
 export default function Following() {
     const [ following, setFollowing ] = useState<User[]>([])
@@ -24,7 +25,8 @@ export default function Following() {
     
     return (
         <div className='Followers'>
-            {following.map(user => <Follow 
+            {following.length === 0 && <Spinner />}
+            {following.length > 0 && following.map(user => <Follow 
                                     key={user.id} 
                                     user={user}
                                     isAllowUnfollow={true}

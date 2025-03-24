@@ -4,6 +4,8 @@ import PostModel from '../../../models/post/Post'
 import profileService from '../../../services/profile';
 import Comments from '../comments/Comments';
 import './Post.css'
+import SpinnerButton from '../../common/spinner-button/SpinnerButton';
+import { useState } from 'react';
 
 interface PostProps {
     post: PostModel,
@@ -16,14 +18,19 @@ export default function Post(props: PostProps) {
     const { id, title, body, user, createdAt, comments } = props.post;
     const { isAllowedActions, removePost, addComment } = props;
 
+    const [ isDeleting, setIsDeleting ] = useState<boolean>(false)
+    
     async function deleteMe() {
         try {
             if(confirm('are you sure you want to delete this post?')) {
+                setIsDeleting(true)
                 await profileService.remove(id)
                 removePost!(id)
             }
         } catch (e) {
             alert(e)
+        } finally {
+            setIsDeleting(false)
         }
     }
 
@@ -38,7 +45,12 @@ export default function Post(props: PostProps) {
             <div className='by-line'>by {user.name} at {(new Date(createdAt)).toLocaleDateString()}</div>
             <div className='body'>{body}</div>
             {isAllowedActions && <div>
-                <button onClick={deleteMe}>Delete</button>
+                <SpinnerButton 
+                    isSubmitting={isDeleting}
+                    buttonText='Delete'
+                    spinnerText='deleting from database...'
+                    onClick={deleteMe}
+                />
                 <button onClick={editMe}>Edit</button>
             </div>}
             <Comments 
