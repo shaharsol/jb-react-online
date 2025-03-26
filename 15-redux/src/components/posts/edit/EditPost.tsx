@@ -7,6 +7,8 @@ import { useForm } from 'react-hook-form'
 import Spinner from '../../common/spinner/Spinner'
 import SpinnerButton from '../../common/spinner-button/SpinnerButton'
 import useTitle from '../../hooks/use-title'
+import { useAppDispatch, useAppSelector } from '../../../redux/hooks'
+import { update } from '../../../redux/profileSlice'
 
 
 export default function EditPost() {
@@ -19,24 +21,29 @@ export default function EditPost() {
 
     useTitle('Edit Post')
     
+    const post = useAppSelector(state => state.profile.posts.find(p => p.id === id!))
     useEffect(() => {
         (async() => {
             try {
-                const post = await profileService.getPost(id!)
-                const { title, body } = post
-                reset({ title, body })
-                setIsReady(true)
+                if (post) {
+                    const { title, body } = post
+                    reset({ title, body })
+                    setIsReady(true)
+                }
             } catch (e) {
                 alert(e)
             }
         })()
-    }, [ id, reset ])
+    }, [ post, reset ])
 
     const navigate = useNavigate()
 
+    const dispatch = useAppDispatch()
+
     async function submit(draft: PostDraft) {
         try {
-            await profileService.edit(id!, draft)
+            const updatedPost = await profileService.edit(id!, draft)
+            dispatch(update(updatedPost))
             alert('post edited successfuly')
             navigate('/profile')
         } catch (e) {
