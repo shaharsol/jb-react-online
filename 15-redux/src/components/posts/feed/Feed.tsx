@@ -3,7 +3,6 @@ import './Feed.css'
 import PostModel from '../../../models/post/Post'
 import feedService from '../../../services/feed'
 import Post from '../post/Post'
-import PostComment from '../../../models/post-comment/PostComment'
 import Spinner from '../../common/spinner/Spinner'
 import useTitle from '../../hooks/use-title'
 
@@ -23,12 +22,6 @@ export default function Feed() {
         })()
     }, [])
     
-    function addComment(postId: string, comment: PostComment) {
-        const newFeed = [...feed]
-        newFeed.find(post => post.id === postId)?.comments.push(comment)
-        setFeed(newFeed)
-    }
-
     return (
         <div className='Feed'>
 
@@ -39,7 +32,6 @@ export default function Feed() {
                                 key={post.id} 
                                 post={post} 
                                 isAllowedActions={false}
-                                addComment={addComment}
                                 />)}
             </>}
 

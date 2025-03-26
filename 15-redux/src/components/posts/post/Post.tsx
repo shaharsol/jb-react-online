@@ -1,31 +1,32 @@
 import { useNavigate } from 'react-router-dom';
-import PostComment from '../../../models/post-comment/PostComment';
 import PostModel from '../../../models/post/Post'
 import profileService from '../../../services/profile';
 import Comments from '../comments/Comments';
 import './Post.css'
 import SpinnerButton from '../../common/spinner-button/SpinnerButton';
 import { useState } from 'react';
+import { useAppDispatch } from '../../../redux/hooks';
+import { remove } from '../../../redux/profileSlice';
 
 interface PostProps {
     post: PostModel,
     isAllowedActions: boolean,
-    removePost?(id: string): void
-    addComment(postId: string, comment: PostComment): void
 }
 export default function Post(props: PostProps) {
 
     const { id, title, body, user, createdAt, comments } = props.post;
-    const { isAllowedActions, removePost, addComment } = props;
+    const { isAllowedActions } = props;
 
     const [ isDeleting, setIsDeleting ] = useState<boolean>(false)
+
+    const dispatch = useAppDispatch()
     
     async function deleteMe() {
         try {
             if(confirm('are you sure you want to delete this post?')) {
                 setIsDeleting(true)
                 await profileService.remove(id)
-                removePost!(id)
+                dispatch(remove({id}))
             }
         } catch (e) {
             alert(e)
@@ -55,7 +56,6 @@ export default function Post(props: PostProps) {
             </div>}
             <Comments 
                 comments={comments}
-                addComment={addComment}
                 postId={id}
             />
             
