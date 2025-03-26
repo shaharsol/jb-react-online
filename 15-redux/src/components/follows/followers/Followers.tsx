@@ -8,19 +8,21 @@ import { init } from '../../../redux/followersSlice'
 
 export default function Followers() {
 
-    const dispatch = useAppDispatch()
     const followers = useAppSelector(state => state.followers.followers)
+    const dispatch = useAppDispatch()
 
     useEffect(() => {
         (async() => {
             try {
-                const followers = await followersService.getFollowers()
-                dispatch(init(followers))
+                if(followers.length === 0) {
+                    const followers = await followersService.getFollowers()
+                    dispatch(init(followers))
+                }
             } catch (e) {
                 alert(e)
             }
         })()
-    }, [ dispatch ])
+    }, [ dispatch, followers.length ])
     
     return (
         <div className='Followers'>
