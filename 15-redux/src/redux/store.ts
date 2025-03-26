@@ -1,9 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { followingSlice } from "./followingSlice";
+import { followersSlice } from "./followersSlice";
 
 const store = configureStore({
     reducer: {
-        following: followingSlice.reducer
+        following: followingSlice.reducer,
+        followers: followersSlice.reducer
     }
 })
 

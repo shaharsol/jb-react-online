@@ -3,27 +3,26 @@ import User from '../../../models/user/User'
 import followingService from '../../../services/following'
 import SpinnerButton from '../../common/spinner-button/SpinnerButton'
 import './Follow.css'
-import { useAppSelector } from '../../../redux/hooks'
+import { useAppDispatch, useAppSelector } from '../../../redux/hooks'
+import { follow, unfollow } from '../../../redux/followingSlice'
 
 interface FollowProps {
     user: User
-    isAllowUnfollow: boolean,
-    unfollow?(id: string): void
 }
 export default function Follow(props: FollowProps) {
 
     const { id, name } = props.user
-    const { unfollow } = props
 
     const [ isSubmitting, setIsSubmitting ] = useState<boolean>(false)
 
     const isFollowing = useAppSelector(state => state.following.following.findIndex(f => f.id === id) > -1)
+    const dispatch = useAppDispatch()
 
     async function unfollowMe() {
         try {
             setIsSubmitting(true)
             await followingService.unfollow(id)
-            unfollow!(id)
+            dispatch(unfollow({id}))
         } catch (e) {
             alert(e)
         } finally {
@@ -32,7 +31,15 @@ export default function Follow(props: FollowProps) {
     }
 
     async function followMe() {
-
+        try {
+            setIsSubmitting(true)
+            await followingService.follow(id)
+            dispatch(follow(props.user))
+        } catch (e) {
+            alert(e)
+        } finally {
+            setIsSubmitting(false)
+        }
     }
 
     return (

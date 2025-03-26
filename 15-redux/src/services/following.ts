@@ -11,6 +11,12 @@ class FollowingService {
         const response = await axios.post<boolean>(`${import.meta.env.VITE_REST_SERVER_URL}/follows/unfollow/${id}`)
         return response.data
     }
+
+    async follow(id: string): Promise<boolean> {
+        const response = await axios.post<boolean>(`${import.meta.env.VITE_REST_SERVER_URL}/follows/follow/${id}`)
+        return response.data
+    }
+
 }
 
 const followingService = new FollowingService()

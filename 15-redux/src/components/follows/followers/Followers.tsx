@@ -1,24 +1,26 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import './Followers.css'
-import User from '../../../models/user/User'
 import followersService from '../../../services/followers'
 import Follow from '../follow/Follow'
 import Spinner from '../../common/spinner/Spinner'
+import { useAppDispatch, useAppSelector } from '../../../redux/hooks'
+import { init } from '../../../redux/followersSlice'
 
 export default function Followers() {
 
-    const [ followers, setFollowers ] = useState<User[]>([])
+    const dispatch = useAppDispatch()
+    const followers = useAppSelector(state => state.followers.followers)
 
     useEffect(() => {
         (async() => {
             try {
                 const followers = await followersService.getFollowers()
-                setFollowers(followers)
+                dispatch(init(followers))
             } catch (e) {
                 alert(e)
             }
         })()
-    }, [])
+    }, [ dispatch ])
     
     return (
         <div className='Followers'>
@@ -26,7 +28,6 @@ export default function Followers() {
             {followers.length > 0 && followers.map(user => <Follow 
                                     key={user.id} 
                                     user={user}
-                                    isAllowUnfollow={false}
                                     />)}
         </div>
     )
