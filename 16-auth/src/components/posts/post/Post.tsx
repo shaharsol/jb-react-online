@@ -1,12 +1,13 @@
 import { useNavigate } from 'react-router-dom';
 import PostModel from '../../../models/post/Post'
-import profileService from '../../../services/auth-aware/ProfileService';
 import Comments from '../comments/Comments';
 import './Post.css'
 import SpinnerButton from '../../common/spinner-button/SpinnerButton';
 import { useState } from 'react';
 import { useAppDispatch } from '../../../redux/hooks';
 import { remove } from '../../../redux/profileSlice';
+import useService from '../../hooks/useService';
+import ProfileService from '../../../services/auth-aware/ProfileService';
 
 interface PostProps {
     post: PostModel,
@@ -20,6 +21,8 @@ export default function Post(props: PostProps) {
     const [ isDeleting, setIsDeleting ] = useState<boolean>(false)
 
     const dispatch = useAppDispatch()
+    
+    const profileService = useService(ProfileService)
     
     async function deleteMe() {
         try {

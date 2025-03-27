@@ -1,10 +1,11 @@
 import { useForm } from 'react-hook-form'
 import './NewPost.css'
 import PostDraft from '../../../models/post/PostDraft'
-import profileService from '../../../services/auth-aware/ProfileService'
 import SpinnerButton from '../../common/spinner-button/SpinnerButton'
 import { useAppDispatch } from '../../../redux/hooks'
 import { newPost } from '../../../redux/profileSlice'
+import useService from '../../hooks/useService'
+import ProfileService from '../../../services/auth-aware/ProfileService'
 
 export default function NewPost() {
 
@@ -12,6 +13,8 @@ export default function NewPost() {
 
     const dispatch = useAppDispatch()
 
+    const profileService = useService(ProfileService)
+    
     async function submit(draft: PostDraft) {
         try {
             const post = await profileService.create(draft)

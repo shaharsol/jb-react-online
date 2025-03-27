@@ -1,7 +1,6 @@
 import { useNavigate, useParams } from 'react-router-dom'
 import './EditPost.css'
 import { useEffect, useState } from 'react'
-import profileService from '../../../services/auth-aware/ProfileService'
 import PostDraft from '../../../models/post/PostDraft'
 import { useForm } from 'react-hook-form'
 import Spinner from '../../common/spinner/Spinner'
@@ -9,6 +8,8 @@ import SpinnerButton from '../../common/spinner-button/SpinnerButton'
 import useTitle from '../../hooks/use-title'
 import { useAppDispatch, useAppSelector } from '../../../redux/hooks'
 import { update } from '../../../redux/profileSlice'
+import useService from '../../hooks/useService'
+import ProfileService from '../../../services/auth-aware/ProfileService'
 
 
 export default function EditPost() {
@@ -20,6 +21,8 @@ export default function EditPost() {
     const [ isReady, setIsReady ] = useState<boolean>(false)
 
     useTitle('Edit Post')
+
+    const profileService = useService(ProfileService)
     
     const post = useAppSelector(state => state.profile.posts.find(p => p.id === id!))
     useEffect(() => {
