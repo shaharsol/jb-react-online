@@ -2,7 +2,7 @@ import Post from "../../models/post/Post"
 import PostDraft from "../../models/post/PostDraft"
 import AuthAware from "./AuthAware"
 
-export default class ProfileService extends AuthAware{
+export default class ProfileService extends AuthAware {
     async getProfile(): Promise<Post[]> {
         const response = await this.axiosInstance.get<Post[]>(`${import.meta.env.VITE_REST_SERVER_URL}/profile`)
         return response.data
