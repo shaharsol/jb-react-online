@@ -4,6 +4,7 @@ import './App.css'
 import { Provider as Redux } from 'react-redux'
 import store from '../../redux/store'
 import Auth from '../auth/auth/Auth'
+import SocketDispatcher from '../socket.io/socket-dispatcher/SocketDispatcher'
 
 function App() {
 
@@ -11,8 +12,10 @@ function App() {
     <div className='App'>
         <BrowserRouter>
           <Redux store={store}>
-            <Auth>
-              <Layout />
+            <Auth>         
+              <SocketDispatcher>
+                <Layout />
+              </SocketDispatcher>     
             </Auth>
           </Redux>
         </BrowserRouter>
