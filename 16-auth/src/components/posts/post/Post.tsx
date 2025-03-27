@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import PostModel from '../../../models/post/Post'
-import profileService from '../../../services/profile';
+import profileService from '../../../services/auth-aware/ProfileService';
 import Comments from '../comments/Comments';
 import './Post.css'
 import SpinnerButton from '../../common/spinner-button/SpinnerButton';

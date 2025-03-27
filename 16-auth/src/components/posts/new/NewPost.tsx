@@ -1,7 +1,7 @@
 import { useForm } from 'react-hook-form'
 import './NewPost.css'
 import PostDraft from '../../../models/post/PostDraft'
-import profileService from '../../../services/profile'
+import profileService from '../../../services/auth-aware/ProfileService'
 import SpinnerButton from '../../common/spinner-button/SpinnerButton'
 import { useAppDispatch } from '../../../redux/hooks'
 import { newPost } from '../../../redux/profileSlice'

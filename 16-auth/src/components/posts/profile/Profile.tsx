@@ -1,5 +1,5 @@
 import { useContext, useEffect } from 'react'
-import profileService from '../../../services/profile'
+import profileService from '../../../services/auth-aware/ProfileService'
 import './Profile.css'
 import Post from '../post/Post'
 import NewPost from '../new/NewPost'
@@ -17,6 +17,8 @@ export default function Profile() {
     const { jwt } = useContext(AuthContext)!
 
     useTitle('Profile')
+
+    // const profileService = useService<ProfileService>()
 
     useEffect(() => {
         (async() => {

@@ -1,7 +1,7 @@
 import { useNavigate, useParams } from 'react-router-dom'
 import './EditPost.css'
 import { useEffect, useState } from 'react'
-import profileService from '../../../services/profile'
+import profileService from '../../../services/auth-aware/ProfileService'
 import PostDraft from '../../../models/post/PostDraft'
 import { useForm } from 'react-hook-form'
 import Spinner from '../../common/spinner/Spinner'
