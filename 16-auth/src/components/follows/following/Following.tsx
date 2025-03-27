@@ -24,7 +24,7 @@ export default function Following() {
                 alert(e)
             }
         })()
-    }, [])
+    }, [ dispatch, following.length, followingService])
 
     return (
         <div className='Followers'>

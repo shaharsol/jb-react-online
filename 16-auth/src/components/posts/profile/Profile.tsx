@@ -29,7 +29,7 @@ export default function Profile() {
                 alert(e)
             }
         })()
-    }, [ dispatch, profile.length ])
+    }, [ dispatch, profile.length, profileService ])
 
     return (
         <div className='Profile'>
