@@ -6,6 +6,8 @@ import { v4 } from "uuid";
 import { SocketDispatcherContext } from "./SocketDispatcherContext";
 import useUserId from "../../hooks/useUserId";
 import { indicateNewContent } from "../../../redux/feedSlice";
+import { follow, unfollow } from "../../../redux/followingSlice";
+import { followRemoved, newFollower } from "../../../redux/followersSlice";
 
 export default function SocketDispatcher(props: PropsWithChildren) {
 
@@ -34,7 +36,21 @@ export default function SocketDispatcher(props: PropsWithChildren) {
                     } else if (following.findIndex(f => f.id === payload.post.userId) > -1) {
                         dispatch(indicateNewContent())
                     }
-                    
+                    break;
+                case 'new-follow':
+                    if(userId === payload.follower.id) {
+                        dispatch(follow(payload.followee))
+                        dispatch(indicateNewContent())
+                    } else if(userId === payload.followee.id) {
+                        dispatch(newFollower(payload.follower))
+                    }
+                    break;
+                case 'new-unfollow':
+                    if(userId === payload.follower.id) {
+                        dispatch(unfollow(payload.followee))
+                    } else if(userId === payload.followee.id) {
+                        dispatch(followRemoved(payload.follower))
+                    }
                     break;
             }
         })
