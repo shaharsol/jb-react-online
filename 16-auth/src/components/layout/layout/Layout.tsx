@@ -7,6 +7,7 @@ import Main from '../main/Main'
 import './Layout.css'
 import Login from '../../auth/login/Login'
 import { AuthContext } from '../../auth/auth/AuthContext'
+import Signup from '../../auth/signup/Signup'
 
 export default function Layout() {
 
@@ -34,7 +35,10 @@ export default function Layout() {
                 </footer>
             </>}
 
-            {!isLoggedIn && <Login/>}
+            {!isLoggedIn && <>
+                <Login />
+                <Signup />
+            </>}
 
         </div>
     )

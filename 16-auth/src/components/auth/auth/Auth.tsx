@@ -10,13 +10,13 @@ export default function Auth(props: PropsWithChildren) {
     const { children } = props
 
     function newLogin(jwt: string) {
-        setJwt(jwt)
         localStorage.setItem(JWT_KEY_NAME, jwt)
+        setJwt(jwt)
     }
 
     function logout() {
-        setJwt('')
         localStorage.removeItem(JWT_KEY_NAME)
+        setJwt('')
     }
 
     return (
