@@ -3,6 +3,7 @@ import Layout from '../layout/layout/Layout'
 import './App.css'
 import { Provider as Redux } from 'react-redux'
 import store from '../../redux/store'
+import Auth from '../auth/auth/Auth'
 
 function App() {
 
@@ -10,7 +11,9 @@ function App() {
     <div className='App'>
         <BrowserRouter>
           <Redux store={store}>
-            <Layout />
+            <Auth>
+              <Layout />
+            </Auth>
           </Redux>
         </BrowserRouter>
     </div>

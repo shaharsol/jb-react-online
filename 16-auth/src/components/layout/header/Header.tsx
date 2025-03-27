@@ -1,7 +1,11 @@
 import { NavLink } from 'react-router-dom'
 import './Header.css'
+import useUsername from '../../hooks/useUsername'
 
 export default function Header() {
+
+    const name = useUsername()
+
     return (
         <div className='Header'>
             <div>
@@ -15,7 +19,7 @@ export default function Header() {
                 </nav>
             </div>
             <div>
-                Hello username
+                Hello {name}
             </div>
         </div>
     )
