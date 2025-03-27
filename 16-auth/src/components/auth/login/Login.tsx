@@ -9,12 +9,12 @@ export default function Login() {
 
     const { register, handleSubmit } = useForm<LoginModel>()
 
-    const { setJwt } = useContext(AuthContext)!
+    const { newLogin } = useContext(AuthContext)!
 
     async function submit(credentials: LoginModel) {
         try {
             const jwt = await authService.login(credentials)
-            setJwt(jwt)
+            newLogin(jwt)
         } catch (e) {
             alert(e)
         }
