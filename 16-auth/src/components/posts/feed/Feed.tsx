@@ -1,12 +1,13 @@
 import { useEffect, useState } from 'react'
 import './Feed.css'
-import feedService from '../../../services/feed'
 import Post from '../post/Post'
 import Spinner from '../../common/spinner/Spinner'
 import useTitle from '../../hooks/use-title'
 import { useAppDispatch, useAppSelector } from '../../../redux/hooks'
 import { init } from '../../../redux/feedSlice'
 import SpinnerButton from '../../common/spinner-button/SpinnerButton'
+import useService from '../../hooks/useService'
+import FeedService from '../../../services/auth-aware/FeedService'
 
 export default function Feed() {
     const feed = useAppSelector(state => state.feed.posts)
@@ -15,6 +16,8 @@ export default function Feed() {
     const dispatch = useAppDispatch()
 
     useTitle('Feed')
+
+    const feedService = useService(FeedService)
 
     useEffect(() => {
         (async() => {
@@ -27,7 +30,7 @@ export default function Feed() {
                 alert(e)
             }
         })()
-    }, [ dispatch, feed.length ])
+    }, [ dispatch, feed.length, feedService ])
     
     const [ isReloading, setIsRealoding ] = useState<boolean>(false)
     

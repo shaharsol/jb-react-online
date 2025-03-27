@@ -1,11 +1,12 @@
 import { useState } from 'react'
 import User from '../../../models/user/User'
-import followingService from '../../../services/following'
 import SpinnerButton from '../../common/spinner-button/SpinnerButton'
 import './Follow.css'
 import { useAppDispatch, useAppSelector } from '../../../redux/hooks'
 import { follow, unfollow } from '../../../redux/followingSlice'
 import { indicateNewContent } from '../../../redux/feedSlice'
+import useService from '../../hooks/useService'
+import FollowingService from '../../../services/auth-aware/FollowingService'
 
 interface FollowProps {
     user: User
@@ -18,6 +19,8 @@ export default function Follow(props: FollowProps) {
 
     const isFollowing = useAppSelector(state => state.following.following.findIndex(f => f.id === id) > -1)
     const dispatch = useAppDispatch()
+
+    const followingService = useService(FollowingService)
 
     async function unfollowMe() {
         try {
