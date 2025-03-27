@@ -3,8 +3,13 @@ import Post from "../models/post/Post"
 import PostDraft from "../models/post/PostDraft"
 
 class ProfileService {
-    async getProfile(): Promise<Post[]> {
-        const response = await axios.get<Post[]>(`${import.meta.env.VITE_REST_SERVER_URL}/profile`)
+    async getProfile(jwt: string): Promise<Post[]> {
+        const options = {
+            headers: {
+                Authorization: `Bearer ${jwt}`
+            }
+        }
+        const response = await axios.get<Post[]>(`${import.meta.env.VITE_REST_SERVER_URL}/profile`, options)
         return response.data
     }
 

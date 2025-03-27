@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useContext, useEffect } from 'react'
 import profileService from '../../../services/profile'
 import './Profile.css'
 import Post from '../post/Post'
@@ -7,11 +7,14 @@ import Spinner from '../../common/spinner/Spinner'
 import useTitle from '../../hooks/use-title'
 import { useAppDispatch, useAppSelector } from '../../../redux/hooks'
 import { init } from '../../../redux/profileSlice'
+import { AuthContext } from '../../auth/auth/AuthContext'
 
 export default function Profile() {
 
     const profile = useAppSelector(state => state.profile.posts)
     const dispatch = useAppDispatch()
+
+    const { jwt } = useContext(AuthContext)!
 
     useTitle('Profile')
 
@@ -19,7 +22,7 @@ export default function Profile() {
         (async() => {
             try {
                 if(profile.length === 0) {
-                    const profile = await profileService.getProfile()
+                    const profile = await profileService.getProfile(jwt)
                     dispatch(init(profile))
                 }
             } catch (e) {
