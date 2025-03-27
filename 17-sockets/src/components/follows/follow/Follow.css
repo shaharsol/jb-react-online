@@ -1,0 +1,11 @@
+.Follow {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    border: 1px dashed lightsalmon;
+}
+
+.Follow img {
+    width: 32px;
+    margin: 0 auto;
+}
