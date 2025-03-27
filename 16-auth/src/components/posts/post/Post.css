@@ -1,0 +1,22 @@
+.Post {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    border: 1px dashed lightgreen;
+    padding: 4px;
+    margin: 8px;
+    border-radius: 4px;
+    box-shadow: 2px;
+}
+
+.Post > .title {
+    font-size: large;
+}
+
+.Post > .by-line {
+    text-decoration: underline;
+}
+
+.Post > .body {
+    font-size: small;
+}
