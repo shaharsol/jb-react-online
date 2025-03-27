@@ -26,7 +26,7 @@ export default function Profile() {
                 alert(e)
             }
         })()
-    }, [])
+    }, [ dispatch, profile.length ])
 
     return (
         <div className='Profile'>

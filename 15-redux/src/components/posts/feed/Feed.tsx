@@ -30,6 +30,7 @@ export default function Feed() {
     }, [ dispatch, feed.length ])
     
     const [ isReloading, setIsRealoding ] = useState<boolean>(false)
+    
     async function reload() {
         try {
             setIsRealoding(true)
