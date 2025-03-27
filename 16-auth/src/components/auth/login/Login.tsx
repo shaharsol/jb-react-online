@@ -19,8 +19,8 @@ export default function Login() {
     return (
         <div className='Login'>
             <form onSubmit={handleSubmit(submit)}>
-                <input {...register('username')}/>
-                <input type="password" {...register('password')}/>
+                <input placeholder='username...' {...register('username')}/>
+                <input placeholder='password' type="password" {...register('password')}/>
                 <button>Login</button>
             </form>
         </div>
