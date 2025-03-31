@@ -7,6 +7,7 @@ import { newPost } from '../../../redux/profileSlice'
 import useService from '../../../hooks/useService'
 import ProfileService from '../../../services/auth-aware/ProfileService'
 import extractErrors from '../../../utils/errorExtractor'
+import { toast, ToastContainer } from 'react-toastify'
 
 export default function NewPost() {
 
@@ -22,7 +23,7 @@ export default function NewPost() {
             reset()
             dispatch(newPost(post))
         } catch (e) {
-            alert(extractErrors(e))
+            toast(extractErrors(e))
         }
     }
 
@@ -57,6 +58,7 @@ export default function NewPost() {
                     spinnerText='Adding post...'
                 />
             </form>
+            <ToastContainer toastStyle={{ backgroundColor: "crimson", color: "white" }}/>
         </div>
     )
 }
