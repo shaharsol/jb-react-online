@@ -23,7 +23,9 @@ export async function getPerUser(req: Request, res: Response, next: NextFunction
 }
 
 export async function getOne(req: Request, res: Response, next: NextFunction) {
-    const id = req.params.id;
+    const rawId = req.params.id;
+    const id = Array.isArray(rawId) ? rawId[0] : rawId;
+    if (!id) return next({ status: 400, message: "post id is required" });
     const post = await Post.findByPk(id, {
         include: [
             {
@@ -41,7 +43,9 @@ export async function getOne(req: Request, res: Response, next: NextFunction) {
 }
 
 export async function remove(req: Request, res: Response, next: NextFunction) {
-    const id = req.params.id;
+    const rawId = req.params.id;
+    const id = Array.isArray(rawId) ? rawId[0] : rawId;
+    if (!id) return next({ status: 400, message: "post id is required" });
     const post = await Post.findByPk(id)
     await post.destroy()
     res.json({
@@ -50,7 +54,9 @@ export async function remove(req: Request, res: Response, next: NextFunction) {
 }
 
 export async function update(req: Request, res: Response, next: NextFunction) {
-    const id = req.params.id;
+    const rawId = req.params.id;
+    const id = Array.isArray(rawId) ? rawId[0] : rawId;
+    if (!id) return next({ status: 400, message: "post id is required" });
     const post = await Post.findByPk(id, {
         include: [
             {

@@ -50,7 +50,9 @@ export async function getUserFollowing(req: Request, res: Response, next: NextFu
 
 export async function follow(req: Request, res: Response, next: NextFunction) {
     const userId = req.userId
-    const userToFollowId = req.params.id;
+    const rawUserToFollowId = req.params.id;
+    const userToFollowId = Array.isArray(rawUserToFollowId) ? rawUserToFollowId[0] : rawUserToFollowId;
+    if (!userToFollowId) return next({ status: 400, message: "user id is required" });
     const follow = await Follow.create({
         followerId: userId,
         followeeId: userToFollowId
@@ -68,7 +70,9 @@ export async function follow(req: Request, res: Response, next: NextFunction) {
 
 export async function unfollow(req: Request, res: Response, next: NextFunction) {
     const userId = req.userId
-    const userToUnfollowId = req.params.id;
+    const rawUserToUnfollowId = req.params.id;
+    const userToUnfollowId = Array.isArray(rawUserToUnfollowId) ? rawUserToUnfollowId[0] : rawUserToUnfollowId;
+    if (!userToUnfollowId) return next({ status: 400, message: "user id is required" });
     console.log(userToUnfollowId)
     await Follow.destroy({
         where: {

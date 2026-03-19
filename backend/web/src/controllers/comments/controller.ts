@@ -5,7 +5,9 @@ import User from "../../models/User";
 import Post from "../../models/Post";
 
 export async function getPerPost(req: Request, res: Response, next: NextFunction) {
-    const postId = req.params.postId
+    const rawPostId = req.params.postId;
+    const postId = Array.isArray(rawPostId) ? rawPostId[0] : rawPostId;
+    if (!postId) return next({ status: 400, message: "postId is required" });
     const comments = await Comment.findAll({
         where: {
             postId
@@ -16,7 +18,9 @@ export async function getPerPost(req: Request, res: Response, next: NextFunction
 }
 
 export async function getOne(req: Request, res: Response, next: NextFunction) {
-    const id = req.params.id;
+    const rawId = req.params.id;
+    const id = Array.isArray(rawId) ? rawId[0] : rawId;
+    if (!id) return next({ status: 400, message: "comment id is required" });
     const post = await Comment.findByPk(id)
     if (!post) return next ({
         status: 404,
@@ -26,7 +30,9 @@ export async function getOne(req: Request, res: Response, next: NextFunction) {
 }
 
 export async function update(req: Request, res: Response, next: NextFunction) {
-    const id = req.params.id;
+    const rawId = req.params.id;
+    const id = Array.isArray(rawId) ? rawId[0] : rawId;
+    if (!id) return next({ status: 400, message: "comment id is required" });
     const comment = await Comment.findByPk(id)
     const { body } = req.body;
     comment.body = body;
@@ -37,7 +43,9 @@ export async function update(req: Request, res: Response, next: NextFunction) {
 export async function create(req: Request, res: Response, next: NextFunction) {
     // const userId = '4b1193cc-7ba1-462c-99c5-2e3ea4ab6d14'
     const userId = req.userId
-    const postId = req.params.postId
+    const rawPostId = req.params.postId;
+    const postId = Array.isArray(rawPostId) ? rawPostId[0] : rawPostId;
+    if (!postId) return next({ status: 400, message: "postId is required" });
     const comment = await Comment.create({
         ...req.body,
         id: v4(),
@@ -51,7 +59,9 @@ export async function create(req: Request, res: Response, next: NextFunction) {
 }
 
 export async function remove(req: Request, res: Response, next: NextFunction) {
-    const id = req.params.id;
+    const rawId = req.params.id;
+    const id = Array.isArray(rawId) ? rawId[0] : rawId;
+    if (!id) return next({ status: 400, message: "comment id is required" });
     const post = await Comment.findByPk(id)
     await post.destroy()
     res.json({
